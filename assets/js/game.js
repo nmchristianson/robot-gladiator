@@ -25,8 +25,7 @@ var startGame = function() {
       var pickedEnemyName = enemyNames[i];
 
       // reset enemyHealth before starting new fight
-      enemyHealth = randomNumber(40, 60);
-
+      enemyHealth = 50;
 
       // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
       fight(pickedEnemyName);
@@ -68,10 +67,6 @@ var fight = function(enemyName) {
     // ask player if they'd like to fight or run
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
 
-    // generate random damage value based on player's attack power
-var damage = randomNumber(playerAttack - 3, playerAttack);
-
-enemyHealth = Math.max(0, enemyHealth - damage);
     // if player picks "skip" confirm and then stop the loop
     if (promptFight === 'skip' || promptFight === 'SKIP') {
       // confirm player wants to skip
@@ -81,28 +76,14 @@ enemyHealth = Math.max(0, enemyHealth - damage);
       if (confirmSkip) {
         window.alert(playerName + ' has decided to skip this fight. Goodbye!');
         // subtract money from playerMoney for skipping
-        playerMoney = Math.max(0, playerMoney - 10);
+        playerMoney = playerMoney - 10;
         shop();
         break;
       }
-    // function to generate a random numeric value
-var randomNumber = function() {
-    var value = Math.floor(Math.random() * 21) + 40;
-  
-    return value;
-    var randomNumber = function(40, 60) {
-        var value = Math.floor(Math.random() * (60 - 40 + 1)) + 40;
-      
-        return value;
-      };
-      var damage = randomNumber(enemyAttack - 3, enemyAttack);
-
-playerHealth = Math.max(0, playerHealth - damage);
-  };
     }
 
     // remove enemy's health by subtracting the amount set in the playerAttack variable
-    enemyHealth = Math.max(0, enemyHealth - playerAttack);
+    enemyHealth = enemyHealth - playerAttack;
     console.log(
       playerName + ' attacked ' + enemyName + '. ' + enemyName + ' now has ' + enemyHealth + ' health remaining.'
     );
@@ -129,7 +110,7 @@ playerHealth = Math.max(0, playerHealth - damage);
     }
 
     // remove players's health by subtracting the amount set in the enemyAttack variable
-    playerHealth = Math.max(0, playerHealth - enemyAttack);
+    playerHealth = playerHealth - enemyAttack;
     console.log(
       enemyName + ' attacked ' + playerName + '. ' + playerName + ' now has ' + playerHealth + ' health remaining.'
     );
